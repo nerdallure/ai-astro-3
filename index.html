@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AstroASO — App Store Optimization & Keyword Tracker</title>
+    <script>
+      (function() {
+        try {
+          var originalFetch = window.fetch;
+          var fetchVal = originalFetch;
+          Object.defineProperty(window, 'fetch', {
+            configurable: true,
+            enumerable: true,
+            get: function() {
+              return fetchVal;
+            },
+            set: function(val) {
+              fetchVal = val;
+            }
+          });
+        } catch (e) {
+          console.warn('Fetch property patch error:', e);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

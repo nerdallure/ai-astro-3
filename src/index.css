@@ -1,0 +1,416 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html.light {
+    color-scheme: light;
+    --color-zinc-950: #f8fafc;
+    --color-zinc-900: #ffffff;
+    --color-zinc-850: #f1f5f9;
+    --color-zinc-800: #e2e8f0;
+    --color-zinc-700: #cbd5e1;
+    --color-zinc-600: #94a3b8;
+    --color-zinc-500: #64748b;
+    --color-zinc-400: #475569;
+    --color-zinc-300: #334155;
+    --color-zinc-200: #1e293b;
+    --color-zinc-100: #0f172a;
+    --color-zinc-50: #020617;
+  }
+}
+
+/* ============================================================
+   GLOBAL BODY & HIGH-CONTRAST TEXT DEFAULTS IN LIGHT MODE
+   ============================================================ */
+html.light,
+html.light body,
+html.light #root {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Headings and Titles */
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6 {
+  color: #0f172a !important;
+}
+
+/* Neutral text utilities - ensure high contrast dark text on light backgrounds */
+html.light .text-zinc-50 { color: #020617 !important; }
+html.light .text-zinc-100 { color: #0f172a !important; }
+html.light .text-zinc-200 { color: #1e293b !important; }
+html.light .text-zinc-300 { color: #334155 !important; }
+html.light .text-zinc-400 { color: #475569 !important; }
+html.light .text-zinc-500 { color: #64748b !important; }
+
+html.light .text-slate-100 { color: #0f172a !important; }
+html.light .text-slate-200 { color: #1e293b !important; }
+html.light .text-slate-300 { color: #334155 !important; }
+html.light .text-slate-400 { color: #475569 !important; }
+
+html.light .text-gray-100 { color: #0f172a !important; }
+html.light .text-gray-200 { color: #1e293b !important; }
+html.light .text-gray-300 { color: #334155 !important; }
+html.light .text-gray-400 { color: #475569 !important; }
+
+/* In light mode, override .text-white for normal layout text and headings (unless inside solid colored buttons/cards) */
+html.light .text-white:not(.text-white-force) {
+  color: #0f172a;
+}
+
+/* Gradient text with text-transparent and clip-text (e.g. Astro hero title) */
+html.light .bg-clip-text.text-transparent {
+  background-image: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4338ca 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* Link hover states in light mode */
+html.light a:hover.hover\:text-white,
+html.light button:hover.hover\:text-white,
+html.light .hover\:text-white:hover {
+  color: #4338ca !important;
+}
+
+html.light .hover\:text-zinc-200:hover,
+html.light .hover\:text-zinc-100:hover {
+  color: #0f172a !important;
+}
+
+/* ============================================================
+   STAT COLORS & ACCENT TYPOGRAPHY IN LIGHT MODE
+   ============================================================ */
+html.light .text-indigo-300 { color: #3730a3 !important; }
+html.light .text-indigo-400 { color: #4338ca !important; }
+html.light .text-purple-300 { color: #581c87 !important; }
+html.light .text-purple-400 { color: #6b21a8 !important; }
+html.light .text-emerald-300 { color: #065f46 !important; }
+html.light .text-emerald-400 { color: #047857 !important; }
+html.light .text-amber-300 { color: #92400e !important; }
+html.light .text-amber-400 { color: #b45309 !important; }
+html.light .text-rose-300 { color: #9f1239 !important; }
+html.light .text-rose-400 { color: #be123c !important; }
+html.light .text-cyan-300 { color: #0e7490 !important; }
+html.light .text-cyan-400 { color: #0891b2 !important; }
+html.light .text-blue-300 { color: #1e40af !important; }
+html.light .text-blue-400 { color: #1d4ed8 !important; }
+
+/* ============================================================
+   1. SOLID VIBRANT GRADIENT BUTTONS IN WHITE MODE
+   ============================================================ */
+/* Primary Indigo/Purple Gradient Buttons */
+html.light .bg-indigo-600,
+html.light .bg-indigo-500,
+html.light .bg-indigo-700,
+html.light button.bg-indigo-600,
+html.light button.bg-indigo-500,
+html.light a.bg-indigo-600,
+html.light a.bg-indigo-500 {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.4) !important;
+}
+
+html.light button.bg-indigo-600:hover,
+html.light button.bg-indigo-500:hover,
+html.light a.bg-indigo-600:hover,
+html.light a.bg-indigo-500:hover {
+  background: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%) !important;
+  box-shadow: 0 6px 20px 0 rgba(79, 70, 229, 0.55) !important;
+}
+
+/* Emerald Solid Gradient Buttons */
+html.light .bg-emerald-600,
+html.light .bg-emerald-500,
+html.light button.bg-emerald-600,
+html.light button.bg-emerald-500 {
+  background: linear-gradient(135deg, #059669 0%, #0d9488 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 14px 0 rgba(5, 150, 105, 0.35) !important;
+}
+
+html.light button.bg-emerald-600:hover,
+html.light button.bg-emerald-500:hover {
+  background: linear-gradient(135deg, #047857 0%, #0f766e 100%) !important;
+  box-shadow: 0 6px 20px 0 rgba(5, 150, 105, 0.5) !important;
+}
+
+/* Rose / Alert Solid Gradient Buttons */
+html.light .bg-rose-600,
+html.light .bg-rose-500,
+html.light button.bg-rose-600,
+html.light button.bg-rose-500 {
+  background: linear-gradient(135deg, #e11d48 0%, #ea580c 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 14px 0 rgba(225, 29, 72, 0.35) !important;
+}
+
+html.light button.bg-rose-600:hover,
+html.light button.bg-rose-500:hover {
+  background: linear-gradient(135deg, #be123c 0%, #c2410c 100%) !important;
+  box-shadow: 0 6px 20px 0 rgba(225, 29, 72, 0.5) !important;
+}
+
+/* Purple Solid Gradient Buttons */
+html.light .bg-purple-600,
+html.light .bg-purple-500,
+html.light button.bg-purple-600 {
+  background: linear-gradient(135deg, #9333ea 0%, #c026d3 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 14px 0 rgba(147, 51, 234, 0.4) !important;
+}
+
+/* Ensure ALL text and SVG icons inside solid gradient buttons stay white */
+html.light .bg-indigo-600 *,
+html.light .bg-indigo-500 *,
+html.light .bg-indigo-700 *,
+html.light .bg-purple-600 *,
+html.light .bg-purple-500 *,
+html.light .bg-emerald-600 *,
+html.light .bg-emerald-500 *,
+html.light .bg-rose-600 *,
+html.light .bg-rose-500 *,
+html.light .bg-amber-600 *,
+html.light button.bg-indigo-600 *,
+html.light button.bg-indigo-500 *,
+html.light button.bg-purple-600 *,
+html.light button.bg-emerald-600 *,
+html.light button.bg-rose-600 *,
+html.light a.bg-indigo-600 *,
+html.light a.bg-indigo-500 * {
+  color: #ffffff !important;
+}
+
+html.light button.bg-indigo-600 svg,
+html.light button.bg-indigo-500 svg,
+html.light button.bg-purple-600 svg,
+html.light button.bg-emerald-600 svg,
+html.light button.bg-rose-600 svg,
+html.light a.bg-indigo-600 svg,
+html.light a.bg-indigo-500 svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* ============================================================
+   2. NEUTRAL & SECONDARY BUTTONS (Solid Satin Gradients + Contrast)
+   ============================================================ */
+html.light button:not(.bg-indigo-600):not(.bg-indigo-500):not(.bg-purple-600):not(.bg-emerald-600):not(.bg-rose-600):not(.bg-amber-600):not([class*="bg-gradient"]):not([class*="bg-emerald-600/"]):not([class*="bg-indigo-600/"]):not([class*="bg-purple-500/"]):not([class*="bg-amber-500/"]):not([class*="bg-rose-500/"]):not([class*="bg-cyan-500/"]):not(.active-tab-dark) {
+  background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%) !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light button:not(.bg-indigo-600):not(.bg-indigo-500):not(.bg-purple-600):not(.bg-emerald-600):not(.bg-rose-600):not(.bg-amber-600):not([class*="bg-gradient"]):not([class*="bg-emerald-600/"]):not([class*="bg-indigo-600/"]):not([class*="bg-purple-500/"]):not([class*="bg-amber-500/"]):not([class*="bg-rose-500/"]):not([class*="bg-cyan-500/"]):not(.active-tab-dark) svg {
+  color: #334155 !important;
+}
+
+html.light button:not(.bg-indigo-600):not(.bg-indigo-500):not(.bg-purple-600):not(.bg-emerald-600):not(.bg-rose-600):hover {
+  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%) !important;
+  border-color: #94a3b8 !important;
+  color: #020617 !important;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Active tabs / pills with bg-zinc-800 text-white or bg-zinc-700 in light mode */
+html.light .bg-zinc-800.text-white,
+html.light button.bg-zinc-800.text-white,
+html.light nav button.bg-zinc-800\/90 {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid #4338ca !important;
+  box-shadow: 0 4px 12px 0 rgba(49, 46, 129, 0.35) !important;
+}
+
+html.light .bg-zinc-800.text-white *,
+html.light button.bg-zinc-800.text-white *,
+html.light nav button.bg-zinc-800\/90 * {
+  color: #ffffff !important;
+}
+
+/* ============================================================
+   3. TINTED PILL BUTTONS & BADGES (Solid Rich Gradients)
+   ============================================================ */
+/* Indigo Pills */
+html.light .bg-indigo-500\/10,
+html.light .bg-indigo-500\/20,
+html.light .bg-indigo-600\/10,
+html.light .bg-indigo-600\/20,
+html.light .bg-indigo-600\/30 {
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%) !important;
+  border: 1.5px solid #a5b4fc !important;
+  color: #3730a3 !important;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(99, 102, 241, 0.15) !important;
+}
+
+/* Emerald Pills */
+html.light .bg-emerald-500\/10,
+html.light .bg-emerald-500\/15,
+html.light .bg-emerald-500\/20,
+html.light .bg-emerald-600\/20,
+html.light .bg-emerald-600\/30 {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%) !important;
+  border: 1.5px solid #6ee7b7 !important;
+  color: #065f46 !important;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.15) !important;
+}
+
+/* Amber Pills */
+html.light .bg-amber-500\/10,
+html.light .bg-amber-500\/20,
+html.light .bg-amber-400\/20 {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%) !important;
+  border: 1.5px solid #fcd34d !important;
+  color: #92400e !important;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(245, 158, 11, 0.15) !important;
+}
+
+/* Rose Pills */
+html.light .bg-rose-500\/10,
+html.light .bg-rose-500\/15,
+html.light .bg-rose-500\/20,
+html.light .bg-rose-500\/25 {
+  background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%) !important;
+  border: 1.5px solid #fda4af !important;
+  color: #9f1239 !important;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(244, 63, 94, 0.15) !important;
+}
+
+/* Purple Pills */
+html.light .bg-purple-500\/10,
+html.light .bg-purple-500\/20 {
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%) !important;
+  border: 1.5px solid #d8b4fe !important;
+  color: #581c87 !important;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(168, 85, 247, 0.15) !important;
+}
+
+/* Cyan Pills */
+html.light .bg-cyan-500\/10,
+html.light .bg-cyan-500\/20 {
+  background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%) !important;
+  border: 1.5px solid #67e8f9 !important;
+  color: #0e7490 !important;
+  font-weight: 600;
+}
+
+/* Blue Pills */
+html.light .bg-blue-500\/10,
+html.light .bg-blue-500\/20 {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%) !important;
+  border: 1.5px solid #93c5fd !important;
+  color: #1e40af !important;
+  font-weight: 600;
+}
+
+/* ============================================================
+   4. HERO BANNERS & CARDS IN WHITE MODE (Vibrant Light Gradients)
+   ============================================================ */
+html.light .bg-gradient-to-r.from-zinc-900,
+html.light .bg-gradient-to-r.from-blue-950\/40,
+html.light .bg-gradient-to-r.from-purple-950\/40 {
+  background: linear-gradient(135deg, #ffffff 0%, #eef2ff 50%, #faf5ff 100%) !important;
+  border: 1.5px solid #c7d2fe !important;
+  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.12), 0 8px 10px -6px rgba(99, 102, 241, 0.08) !important;
+}
+
+html.light .bg-zinc-900,
+html.light .bg-zinc-900\/80,
+html.light .bg-zinc-900\/90 {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.06) !important;
+}
+
+html.light .bg-zinc-950,
+html.light .bg-zinc-950\/80,
+html.light .bg-zinc-950\/60 {
+  background: #f8fafc !important;
+}
+
+html.light aside.bg-zinc-950 {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
+  border-right: 1px solid #e2e8f0 !important;
+}
+
+html.light header.bg-zinc-950\/80 {
+  background: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+/* ============================================================
+   5. TABLES & DATA CELLS IN LIGHT MODE
+   ============================================================ */
+html.light table th {
+  color: #334155 !important;
+  font-weight: 700 !important;
+  background-color: #f1f5f9 !important;
+  border-bottom: 1.5px solid #cbd5e1 !important;
+}
+
+html.light table td {
+  color: #0f172a !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+html.light table tr:hover td {
+  background-color: #f8fafc !important;
+}
+
+/* ============================================================
+   6. FORM INPUTS & SELECTS
+   ============================================================ */
+html.light input,
+html.light select,
+html.light textarea {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1.5px solid #cbd5e1 !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+html.light input:focus,
+html.light select:focus,
+html.light textarea:focus {
+  border-color: #6366f1 !important;
+  outline: 2px solid rgba(99, 102, 241, 0.25) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
+}
+
+/* ============================================================
+   7. RECHARTS IN LIGHT MODE
+   ============================================================ */
+html.light .recharts-cartesian-grid-horizontal line,
+html.light .recharts-cartesian-grid-vertical line {
+  stroke: #e2e8f0 !important;
+}
+
+html.light .recharts-text {
+  fill: #475569 !important;
+}
+
+

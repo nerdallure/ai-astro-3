@@ -1,0 +1,6 @@
+{
+  "name": "AstroASO",
+  "description": "App Store Optimization (ASO) suite for Apple platform developers to track keyword rankings, analyze competitors, inspect Apple Search Ads metrics, simulate search results, and generate AI metadata.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
