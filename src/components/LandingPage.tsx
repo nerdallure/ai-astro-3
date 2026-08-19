@@ -43,7 +43,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 }) => {
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
   const [activePreviewTab, setActivePreviewTab] = useState<
-    "tracker" | "research" | "simulator" | "competitors" | "metadata"
+    "tracker" | "research" | "simulator" | "competitors"
   >("tracker");
 
   const faqs = [
@@ -275,16 +275,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               >
                 Live Search Simulator
               </button>
-              <button
-                onClick={() => setActivePreviewTab("metadata")}
-                className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
-                  activePreviewTab === "metadata"
-                    ? "bg-indigo-600 text-white font-bold"
-                    : "text-zinc-400 hover:text-zinc-200"
-                }`}
-              >
-                AI Metadata Optimizer
-              </button>
             </div>
 
             {/* Window Content based on selected interactive preview tab */}
@@ -437,40 +427,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   </div>
                 </div>
               )}
-
-              {activePreviewTab === "metadata" && (
-                <div className="bg-zinc-900 p-4 rounded-xl border border-zinc-800 space-y-3 text-xs">
-                  <h4 className="font-bold text-white text-sm flex items-center space-x-2">
-                    <Sparkles className="w-4 h-4 text-indigo-400" />
-                    <span>Gemini AI Metadata Generator & Character Counter</span>
-                  </h4>
-                  <div className="space-y-2">
-                    <div className="bg-zinc-950 p-3 rounded-lg border border-zinc-800">
-                      <div className="flex justify-between text-[11px] text-zinc-400 mb-1">
-                        <span>Optimized App Title</span>
-                        <span className="text-emerald-400 font-mono">29 / 30 chars</span>
-                      </div>
-                      <p className="font-mono text-white font-bold">Astro: AI Calendar & Planner</p>
-                    </div>
-                    <div className="bg-zinc-950 p-3 rounded-lg border border-zinc-800">
-                      <div className="flex justify-between text-[11px] text-zinc-400 mb-1">
-                        <span>Optimized Subtitle</span>
-                        <span className="text-emerald-400 font-mono">30 / 30 chars</span>
-                      </div>
-                      <p className="font-mono text-white font-bold">Time Blocking & Habit Routine</p>
-                    </div>
-                    <div className="bg-zinc-950 p-3 rounded-lg border border-zinc-800">
-                      <div className="flex justify-between text-[11px] text-zinc-400 mb-1">
-                        <span>100-Char Keyword Field (Comma separated, no spaces)</span>
-                        <span className="text-emerald-400 font-mono">98 / 100 chars</span>
-                      </div>
-                      <p className="font-mono text-indigo-300 text-[11px] truncate">
-                        schedule,agenda,focus,todo,task,reminder,smart,daily,work,organize,productivity
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -538,11 +494,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           {/* Feature 5 */}
           <div className="bg-zinc-900/80 border border-zinc-800 p-6 rounded-2xl space-y-3 hover:border-zinc-700 transition-all shadow-md">
             <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
-              <Bot className="w-5 h-5" />
+              <Star className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-white text-base">Gemini AI Metadata & Keyword Builder</h3>
+            <h3 className="font-bold text-white text-base">Global Storefront Ratings & Analytics</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
-              Auto-generate 30-char Titles, Subtitles, and max-density 100-character keyword strings that strictly adhere to Apple App Store Connect rules.
+              Track global sentiment, star ratings distribution, and localized user feedback across every Apple App Store market worldwide.
             </p>
           </div>
 

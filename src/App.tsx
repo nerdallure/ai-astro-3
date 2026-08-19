@@ -18,7 +18,6 @@ import { Sidebar, StudioTab } from "./components/Sidebar";
 import { KeywordTracker } from "./components/KeywordTracker";
 import { KeywordResearch } from "./components/KeywordResearch";
 import { SearchSimulator } from "./components/SearchSimulator";
-import { AiMetadataOptimizer } from "./components/AiMetadataOptimizer";
 import { GlobalRatings } from "./components/GlobalRatings";
 import { AddAppModal } from "./components/AddAppModal";
 import { LandingPage } from "./components/LandingPage";
@@ -537,7 +536,6 @@ export default function App() {
               { id: "alerts", label: `Alerts (${unreadAlertsForSelectedApp})` },
               { id: "research", label: "Research" },
               { id: "simulator", label: "Simulator" },
-              { id: "ai-metadata", label: "AI Metadata" },
               { id: "ratings", label: "Ratings" },
             ].map((t) => (
               <button
@@ -603,15 +601,6 @@ export default function App() {
           {activeTab === "simulator" && (
             <SearchSimulator
               app={{ ...selectedApp, country: selectedCountry }}
-              countryCode={selectedCountry}
-              countryName={currentCountryObj.name}
-            />
-          )}
-
-          {activeTab === "ai-metadata" && (
-            <AiMetadataOptimizer
-              app={{ ...selectedApp, country: selectedCountry }}
-              onUpdateMetadata={handleUpdateMetadata}
               countryCode={selectedCountry}
               countryName={currentCountryObj.name}
             />

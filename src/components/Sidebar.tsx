@@ -17,7 +17,6 @@ export type StudioTab =
   | "tracker"
   | "research"
   | "simulator"
-  | "ai-metadata"
   | "ratings"
   | "alerts";
 
@@ -70,12 +69,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
       id: "simulator",
       label: "App Store Search Simulator",
       icon: <Smartphone className="w-4 h-4 text-indigo-400" />,
-    },
-    {
-      id: "ai-metadata",
-      label: "AI Metadata Optimizer",
-      icon: <Sparkles className="w-4 h-4 text-amber-400" />,
-      highlight: true,
     },
     {
       id: "ratings",
