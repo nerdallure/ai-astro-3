@@ -30,6 +30,24 @@ export const SubHeaderSearchBar: React.FC<SubHeaderSearchBarProps> = ({
   const currentCountryObj =
     STOREFRONT_COUNTRIES.find((c) => c.code === selectedCountry) || STOREFRONT_COUNTRIES[0];
 
+  const handleSearchNow = async (text: string) => {
+    if (!text.trim()) {
+      setResults([]);
+      setIsSearching(false);
+      return;
+    }
+    setIsSearching(true);
+    setIsOpen(true);
+    try {
+      const appResults = await searchAppStore(text, selectedCountry, 8);
+      setResults(appResults || []);
+    } catch (err) {
+      console.error("Sub-header App Store search error:", err);
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
   useEffect(() => {
     if (!query.trim()) {
       setResults([]);
@@ -37,17 +55,9 @@ export const SubHeaderSearchBar: React.FC<SubHeaderSearchBarProps> = ({
       return;
     }
 
-    const timer = setTimeout(async () => {
-      setIsSearching(true);
-      try {
-        const appResults = await searchAppStore(query, selectedCountry, 8);
-        setResults(appResults || []);
-      } catch (err) {
-        console.error("Sub-header App Store search error:", err);
-      } finally {
-        setIsSearching(false);
-      }
-    }, 250);
+    const timer = setTimeout(() => {
+      handleSearchNow(query);
+    }, 200);
 
     return () => clearTimeout(timer);
   }, [query, selectedCountry]);
@@ -131,6 +141,12 @@ export const SubHeaderSearchBar: React.FC<SubHeaderSearchBarProps> = ({
                 setIsOpen(true);
               }}
               onFocus={() => setIsOpen(true)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  handleSearchNow(query);
+                }
+              }}
               placeholder={`Search App Store in ${currentCountryObj.name} (e.g. Flighty, Notion, Duolingo, Strava)...`}
               className="w-full bg-zinc-900 border border-zinc-800/90 focus:border-indigo-500 rounded-xl pl-9 pr-9 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none transition-all shadow-inner"
             />
