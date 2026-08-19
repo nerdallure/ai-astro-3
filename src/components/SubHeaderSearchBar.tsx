@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { TrackedApp, Country } from "../types";
 import { STOREFRONT_COUNTRIES } from "../data/mockData";
+import { searchAppStore, AppStoreSearchResult } from "../utils/appStoreClient";
 import { Search, Loader2, X, Plus, Check, ArrowRight } from "lucide-react";
 
 interface SubHeaderSearchBarProps {
@@ -39,13 +40,8 @@ export const SubHeaderSearchBar: React.FC<SubHeaderSearchBarProps> = ({
     const timer = setTimeout(async () => {
       setIsSearching(true);
       try {
-        const res = await fetch(
-          `/api/appstore/search?term=${encodeURIComponent(query)}&country=${selectedCountry}&limit=6`
-        );
-        if (res.ok) {
-          const data = await res.json();
-          setResults(data.results || []);
-        }
+        const appResults = await searchAppStore(query, selectedCountry, 8);
+        setResults(appResults || []);
       } catch (err) {
         console.error("Sub-header App Store search error:", err);
       } finally {

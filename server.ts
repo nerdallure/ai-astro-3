@@ -540,7 +540,7 @@ Target Audience: ${targetAudience || "General Users"}
 Target Storefront Country: ${country || "US"}`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3.7-flash",
         contents: prompt,
         config: {
           responseMimeType: "application/json",
@@ -657,7 +657,7 @@ Storefront Country: ${country || "US"}
 For each keyword, simulate realistic Apple Search Ads Popularity (1-100 score, higher = more traffic) and Ranking Difficulty (1-100 score, lower = easier to rank #1).`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3.7-flash",
         contents: prompt,
         config: {
           responseMimeType: "application/json",
@@ -723,7 +723,7 @@ Assign each variation strictly one variationType among: 'Long-Tail', 'Feature & 
 Simulate realistic Apple Search Ads Popularity (1-100 score), Ranking Difficulty (1-100 score), and Opportunity Score (1-100).`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3.7-flash",
         contents: prompt,
         config: {
           responseMimeType: "application/json",
@@ -778,7 +778,7 @@ Keywords to translate:
 ${JSON.stringify(keywords)}`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-3.6-flash",
+        model: "gemini-3.7-flash",
         contents: prompt,
         config: {
           responseMimeType: "application/json",
@@ -823,7 +823,7 @@ Competitor App: ${JSON.stringify(competitorApp)}
 Analyze title/subtitle keyword density, keyword gap opportunities, review sentiment contrast, and actionable ranking strategy.`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3.7-flash",
         contents: prompt,
         config: {
           responseMimeType: "application/json",

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TrackedApp } from "../types";
+import { searchAppStore } from "../utils/appStoreClient";
 import { Search, Plus, Loader2 } from "lucide-react";
 
 interface AddAppModalProps {
@@ -24,13 +25,8 @@ export const AddAppModal: React.FC<AddAppModalProps> = ({
 
     setSearching(true);
     try {
-      const response = await fetch(
-        `/api/appstore/search?term=${encodeURIComponent(searchQuery)}&country=${country}&limit=8`
-      );
-      if (response.ok) {
-        const data = await response.json();
-        setSearchResults(data.results || []);
-      }
+      const results = await searchAppStore(searchQuery, country, 10);
+      setSearchResults(results || []);
     } catch (err) {
       console.error("App Store Search error:", err);
     } finally {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { TrackedApp } from "../types";
+import { searchAppStore } from "../utils/appStoreClient";
 import {
   Smartphone,
   Search,
@@ -60,13 +61,8 @@ export const SearchSimulator: React.FC<SearchSimulatorProps> = ({
     setLoading(true);
     setShowSuggestions(false);
     try {
-      const response = await fetch(
-        `/api/appstore/search?term=${encodeURIComponent(searchTerm)}&country=${countryCode}&limit=10`
-      );
-      if (response.ok) {
-        const data = await response.json();
-        setSearchResults(data.results || []);
-      }
+      const results = await searchAppStore(searchTerm, countryCode, 12);
+      setSearchResults(results || []);
     } catch (err) {
       console.error("Search simulator error:", err);
     } finally {
