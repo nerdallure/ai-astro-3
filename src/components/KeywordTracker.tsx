@@ -57,6 +57,7 @@ interface KeywordTrackerProps {
   onBulkAssignTags?: (keywordIds: string[], tags: string[]) => void;
   onUpdateKeywordNotes: (id: string, notes: string) => void;
   onTranslateKeywords: () => void;
+  countryCode?: string;
   countryName: string;
   onUpdateAlertSettings?: (appId: string, settings: AppAlertSettings) => void;
   onMarkAsRead?: (alertId: string) => void;
@@ -75,6 +76,7 @@ export const KeywordTracker: React.FC<KeywordTrackerProps> = ({
   onBulkAssignTags,
   onUpdateKeywordNotes,
   onTranslateKeywords,
+  countryCode = "us",
   countryName,
   onUpdateAlertSettings,
   onMarkAsRead,
@@ -105,6 +107,14 @@ export const KeywordTracker: React.FC<KeywordTrackerProps> = ({
   const [selectedKeywordForHistory, setSelectedKeywordForHistory] = useState<TrackedKeyword | null>(
     app.keywords[0] || null
   );
+
+  // Sync selected keyword when app changes
+  React.useEffect(() => {
+    setSelectedKeywordForHistory(app.keywords[0] || null);
+    setSelectedKeywordIds([]);
+    setSearchTerm("");
+    setSelectedTag("All");
+  }, [app.id]);
 
   const appAlerts = alerts.filter((a) => a.appId === app.id);
   const unreadAlertsCount = appAlerts.filter((a) => !a.read).length;

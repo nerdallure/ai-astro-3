@@ -6,7 +6,7 @@ import { Search, Loader2, X, Plus, Check, ArrowRight } from "lucide-react";
 interface SubHeaderSearchBarProps {
   apps: TrackedApp[];
   selectedApp: TrackedApp;
-  selectedCountry: Country;
+  selectedCountry: string;
   onSelectApp: (app: TrackedApp) => void;
   onAddApp: (app: TrackedApp) => void;
   onOpenAddApp: () => void;

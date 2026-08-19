@@ -276,16 +276,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 Live Search Simulator
               </button>
               <button
-                onClick={() => setActivePreviewTab("competitors")}
-                className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
-                  activePreviewTab === "competitors"
-                    ? "bg-indigo-600 text-white font-bold"
-                    : "text-zinc-400 hover:text-zinc-200"
-                }`}
-              >
-                Competitor Gap Analysis
-              </button>
-              <button
                 onClick={() => setActivePreviewTab("metadata")}
                 className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
                   activePreviewTab === "metadata"
@@ -443,32 +433,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                         </div>
                       </div>
                       <span className="text-xs text-emerald-400 font-mono font-bold">● Ranked #1</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {activePreviewTab === "competitors" && (
-                <div className="bg-zinc-900 p-4 rounded-xl border border-zinc-800 space-y-3">
-                  <h4 className="font-bold text-white text-sm flex items-center space-x-2">
-                    <Users className="w-4 h-4 text-purple-400" />
-                    <span>Competitor Keyword Gap Analysis</span>
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                    <div className="bg-zinc-950 p-3 rounded-lg border border-zinc-800">
-                      <p className="text-zinc-400 text-[11px]">Keywords You Share</p>
-                      <p className="text-xl font-bold text-indigo-400 mt-1">14 Keywords</p>
-                      <p className="text-[10px] text-zinc-500 mt-0.5">ai calendar, schedule, planner</p>
-                    </div>
-                    <div className="bg-zinc-950 p-3 rounded-lg border border-zinc-800">
-                      <p className="text-zinc-400 text-[11px]">Competitor Exclusive (Gaps)</p>
-                      <p className="text-xl font-bold text-amber-400 mt-1">28 Gaps</p>
-                      <p className="text-[10px] text-zinc-500 mt-0.5">shared calendar, family agenda</p>
-                    </div>
-                    <div className="bg-zinc-950 p-3 rounded-lg border border-zinc-800">
-                      <p className="text-zinc-400 text-[11px]">Untapped Easy Opportunities</p>
-                      <p className="text-xl font-bold text-emerald-400 mt-1">9 High-ROI</p>
-                      <p className="text-[10px] text-zinc-500 mt-0.5">routine timeblock widget</p>
                     </div>
                   </div>
                 </div>

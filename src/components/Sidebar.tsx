@@ -16,7 +16,6 @@ import {
 export type StudioTab =
   | "tracker"
   | "research"
-  | "competitors"
   | "simulator"
   | "ai-metadata"
   | "ratings"
@@ -26,7 +25,7 @@ interface SidebarProps {
   activeTab: StudioTab;
   onSelectTab: (tab: StudioTab) => void;
   keywordCount: number;
-  competitorCount: number;
+  competitorCount?: number;
   unreadAlertsCount?: number;
   onExportCsv: () => void;
   onImportCsv: () => void;
@@ -66,12 +65,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
       id: "research",
       label: "Keyword Research & ASA",
       icon: <Search className="w-4 h-4 text-blue-400" />,
-    },
-    {
-      id: "competitors",
-      label: "Competitors & Metadata",
-      icon: <Users className="w-4 h-4 text-purple-400" />,
-      badge: competitorCount,
     },
     {
       id: "simulator",

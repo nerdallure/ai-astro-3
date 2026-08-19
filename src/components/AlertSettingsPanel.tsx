@@ -55,6 +55,20 @@ export const AlertSettingsPanel: React.FC<AlertSettingsPanelProps> = ({
   const [filterSeverity, setFilterSeverity] = useState<"all" | "unread" | "high">("all");
   const [savedSuccess, setSavedSuccess] = useState(false);
 
+  // Sync settings when app changes
+  React.useEffect(() => {
+    setSettings(app.alertSettings || {
+      enabled: true,
+      dropThresholdRank: 10,
+      minPositionDrop: 3,
+      alertOnUnranked: true,
+      notifyOnImprovement: true,
+      emailNotifications: true,
+      inAppToasts: true,
+      emailRecipient: "developer@astrosoftware.io",
+    });
+  }, [app.id, app.alertSettings]);
+
   const appAlerts = alerts.filter((a) => a.appId === app.id);
   const unreadCount = appAlerts.filter((a) => !a.read).length;
 

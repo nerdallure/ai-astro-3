@@ -35,6 +35,7 @@ interface KeywordResearchProps {
   app: TrackedApp;
   onAddKeyword: (keyword: string) => void;
   onAddKeywords?: (keywords: string[]) => void;
+  countryCode?: string;
   countryName: string;
 }
 
@@ -42,6 +43,7 @@ export const KeywordResearch: React.FC<KeywordResearchProps> = ({
   app,
   onAddKeyword,
   onAddKeywords,
+  countryCode = "us",
   countryName,
 }) => {
   const [researchMode, setResearchMode] = useState<"bulk-variations" | "opportunity-discovery">(
@@ -49,12 +51,51 @@ export const KeywordResearch: React.FC<KeywordResearchProps> = ({
   );
 
   // Bulk Variations Generator States
-  const [coreKeyword, setCoreKeyword] = useState("calendar");
+  const defaultKw = app.keywords[0]?.keyword || app.category.toLowerCase() || "planner";
+  const [coreKeyword, setCoreKeyword] = useState(defaultKw);
   const [generatingVariations, setGeneratingVariations] = useState(false);
   const [selectedVariationSet, setSelectedVariationSet] = useState<Set<string>>(new Set());
   const [bucketFilter, setBucketFilter] = useState<string>("All");
   const [hideTrackedFilter, setHideTrackedFilter] = useState<boolean>(false);
   const [lastBulkTrackedCount, setLastBulkTrackedCount] = useState<number | null>(null);
+
+  // Sync state on app switch
+  React.useEffect(() => {
+    const kw = app.keywords[0]?.keyword || app.category.toLowerCase() || "planner";
+    setCoreKeyword(kw);
+    setSeedKeyword(kw);
+    setSelectedVariationSet(new Set());
+    setAddedKeywordSet(new Set(app.keywords.map((k) => k.keyword.toLowerCase())));
+
+    // Auto-generate fresh opportunity keyword ideas for the selected app
+    const fetchFreshDiscovery = async () => {
+      setLoadingDiscovery(true);
+      try {
+        const response = await fetch("/api/gemini/keyword-variations", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            coreKeyword: kw,
+            appName: app.name,
+            category: app.category,
+            country: countryCode,
+          }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          if (Array.isArray(data.variations) && data.variations.length > 0) {
+            setVariations(data.variations);
+          }
+        }
+      } catch (err) {
+        console.error("Auto keyword sync error:", err);
+      } finally {
+        setLoadingDiscovery(false);
+      }
+    };
+
+    fetchFreshDiscovery();
+  }, [app.id, app.name, countryCode]);
 
   // Default seed variations for instant display
   const [variations, setVariations] = useState<BulkKeywordVariation[]>([

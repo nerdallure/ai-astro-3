@@ -19,6 +19,7 @@ import {
 
 interface SearchSimulatorProps {
   app: TrackedApp;
+  countryCode?: string;
   countryName: string;
 }
 
@@ -32,11 +33,20 @@ interface AutocompleteHint {
 
 export const SearchSimulator: React.FC<SearchSimulatorProps> = ({
   app,
+  countryCode = "us",
   countryName,
 }) => {
-  const [query, setQuery] = useState("calendar");
+  const initialQuery = app.keywords[0]?.keyword || app.name.split(" ")[0]?.toLowerCase() || "app";
+  const [query, setQuery] = useState(initialQuery);
   const [loading, setLoading] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
+
+  // Sync query on app change
+  useEffect(() => {
+    const q = app.keywords[0]?.keyword || app.name.split(" ")[0]?.toLowerCase() || "app";
+    setQuery(q);
+    fetchSearchResults(q);
+  }, [app.id]);
 
   // Autocomplete states
   const [hints, setHints] = useState<AutocompleteHint[]>([]);
@@ -51,7 +61,7 @@ export const SearchSimulator: React.FC<SearchSimulatorProps> = ({
     setShowSuggestions(false);
     try {
       const response = await fetch(
-        `/api/appstore/search?term=${encodeURIComponent(searchTerm)}&country=${app.country}&limit=10`
+        `/api/appstore/search?term=${encodeURIComponent(searchTerm)}&country=${countryCode}&limit=10`
       );
       if (response.ok) {
         const data = await response.json();
@@ -66,7 +76,7 @@ export const SearchSimulator: React.FC<SearchSimulatorProps> = ({
 
   useEffect(() => {
     fetchSearchResults(query);
-  }, []);
+  }, [countryCode]);
 
   // Fetch live Apple query completions with debouncing
   useEffect(() => {
@@ -80,7 +90,7 @@ export const SearchSimulator: React.FC<SearchSimulatorProps> = ({
       setIsFetchingHints(true);
       try {
         const response = await fetch(
-          `/api/appstore/autocomplete?term=${encodeURIComponent(query)}&country=${app.country}`
+          `/api/appstore/autocomplete?term=${encodeURIComponent(query)}&country=${countryCode}`
         );
         if (response.ok) {
           const data = await response.json();
@@ -97,7 +107,7 @@ export const SearchSimulator: React.FC<SearchSimulatorProps> = ({
     }, 180);
 
     return () => clearTimeout(timer);
-  }, [query, app.country]);
+  }, [query, countryCode]);
 
   // Click outside to close auto-complete dropdown
   useEffect(() => {

@@ -17,7 +17,6 @@ import { Header } from "./components/Header";
 import { Sidebar, StudioTab } from "./components/Sidebar";
 import { KeywordTracker } from "./components/KeywordTracker";
 import { KeywordResearch } from "./components/KeywordResearch";
-import { CompetitorInspector } from "./components/CompetitorInspector";
 import { SearchSimulator } from "./components/SearchSimulator";
 import { AiMetadataOptimizer } from "./components/AiMetadataOptimizer";
 import { GlobalRatings } from "./components/GlobalRatings";
@@ -537,7 +536,6 @@ export default function App() {
               { id: "tracker", label: "Tracker" },
               { id: "alerts", label: `Alerts (${unreadAlertsForSelectedApp})` },
               { id: "research", label: "Research" },
-              { id: "competitors", label: "Competitors" },
               { id: "simulator", label: "Simulator" },
               { id: "ai-metadata", label: "AI Metadata" },
               { id: "ratings", label: "Ratings" },
@@ -559,7 +557,7 @@ export default function App() {
           {/* Active Tab View */}
           {activeTab === "tracker" && (
             <KeywordTracker
-              app={selectedApp}
+              app={{ ...selectedApp, country: selectedCountry }}
               alerts={alerts}
               onAddKeywords={handleAddKeywords}
               onImportMappedKeywords={handleImportMappedKeywords}
@@ -568,6 +566,7 @@ export default function App() {
               onBulkAssignTags={handleBulkAssignTags}
               onUpdateKeywordNotes={handleUpdateKeywordNotes}
               onTranslateKeywords={() => {}}
+              countryCode={selectedCountry}
               countryName={currentCountryObj.name}
               onUpdateAlertSettings={handleUpdateAlertSettings}
               onMarkAsRead={handleMarkAsRead}
@@ -580,7 +579,7 @@ export default function App() {
           {activeTab === "alerts" && (
             <div className="p-4 sm:p-6 max-w-5xl mx-auto space-y-6">
               <AlertSettingsPanel
-                app={selectedApp}
+                app={{ ...selectedApp, country: selectedCountry }}
                 alerts={alerts}
                 onUpdateAlertSettings={handleUpdateAlertSettings}
                 onMarkAsRead={handleMarkAsRead}
@@ -593,36 +592,37 @@ export default function App() {
 
           {activeTab === "research" && (
             <KeywordResearch
-              app={selectedApp}
+              app={{ ...selectedApp, country: selectedCountry }}
               onAddKeyword={handleAddSingleKeyword}
               onAddKeywords={handleAddKeywords}
-              countryName={currentCountryObj.name}
-            />
-          )}
-
-          {activeTab === "competitors" && (
-            <CompetitorInspector
-              app={selectedApp}
-              onAddCompetitor={handleAddCompetitor}
-              onDeleteCompetitor={handleDeleteCompetitor}
+              countryCode={selectedCountry}
               countryName={currentCountryObj.name}
             />
           )}
 
           {activeTab === "simulator" && (
-            <SearchSimulator app={selectedApp} countryName={currentCountryObj.name} />
+            <SearchSimulator
+              app={{ ...selectedApp, country: selectedCountry }}
+              countryCode={selectedCountry}
+              countryName={currentCountryObj.name}
+            />
           )}
 
           {activeTab === "ai-metadata" && (
             <AiMetadataOptimizer
-              app={selectedApp}
+              app={{ ...selectedApp, country: selectedCountry }}
               onUpdateMetadata={handleUpdateMetadata}
+              countryCode={selectedCountry}
               countryName={currentCountryObj.name}
             />
           )}
 
           {activeTab === "ratings" && (
-            <GlobalRatings app={selectedApp} countryName={currentCountryObj.name} />
+            <GlobalRatings
+              app={{ ...selectedApp, country: selectedCountry }}
+              countryCode={selectedCountry}
+              countryName={currentCountryObj.name}
+            />
           )}
         </main>
       </div>
